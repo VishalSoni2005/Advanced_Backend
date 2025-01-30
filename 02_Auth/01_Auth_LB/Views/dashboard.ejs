@@ -1,0 +1,12 @@
+<% layout('layout') %>
+<% body %>
+    <h2>Welcome, <%= user.name %>!</h2>
+    <p>Role: <%= user.role %></p>
+    <% if (user.role === 'admin') { %>
+        <a href="/admin">Go to Admin Dashboard</a>
+    <% } else { %>
+        <a href="/student">Go to Student Dashboard</a>
+    <% } %>
+    <br><br>
+    <a href="/logout">Logout</a>
+<% endbody %>
