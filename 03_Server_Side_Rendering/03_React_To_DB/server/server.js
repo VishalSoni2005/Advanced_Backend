@@ -8,7 +8,7 @@ const { connectDB } = require("./config/db");
 connectDB();
 
 // Middleware
-app.use(cors()); //!
+// app.use(cors()); //!
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
