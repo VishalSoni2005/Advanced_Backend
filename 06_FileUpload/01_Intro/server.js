@@ -12,7 +12,12 @@ cloudinaryConnect(); //todo: connect cloudinary
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(fileUpload()); //! special middleware to upload files
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  }),
+); //! special middleware to upload files
 
 // Routes
 app.use("/api/v1/upload", Upload); // todo: upload route
