@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
-const  connectDB  = require("./config/db");
+const connectDB = require("./config/db");
 const { cloudinaryConnect } = require("./config/cloud");
-require("dotenv").config();
 const fileUpload = require("express-fileupload");
 const Upload = require("./routes/upload");
 
+require("dotenv").config();
 connectDB(); //todo: connect mongodb
 cloudinaryConnect(); //todo: connect cloudinary
 
@@ -17,7 +17,7 @@ app.use(
     useTempFiles: true,
     tempFileDir: "/tmp/",
   }),
-); //! special middleware to upload files
+); //* special middleware to upload files
 
 // Routes
 app.use("/api/v1/upload", Upload); // todo: upload route

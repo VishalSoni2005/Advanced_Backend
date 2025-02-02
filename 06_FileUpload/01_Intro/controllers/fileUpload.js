@@ -1,5 +1,7 @@
 const cloudinary = require("cloudinary").v2;
-const File = require("../models/File");
+const DB_File = require("../models/File");
+const fs = require("fs");
+const path = require("path");
 
 // Utility function to validate file types
 function isValidFileType(fileName, supportedTypes) {
@@ -73,22 +75,22 @@ exports.imageUpload = async (req, res) => {
     const response = await uploadToCloudinary(file, "VishalSoni");
     console.log(response);
 
-    // // db entry
-    // const newFile = new File({
-    //   name,
-    //   imageURL: response.secure_url,
-    //   tag,
-    //   email,
-    // });
-    // await newFile.save();
-    // console.log("File saved to DB");
+    // db entry
+    const newFile = new DB_File({
+      name,
+      imageURL: response.secure_url,
+      tag,
+      email,
+    });
+    await newFile.save();
+    console.log("File saved to DB");
 
     // deleting local file
-    // fs.unlink(file.tempFilePath, (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //   }
-    // });
+    fs.unlink(file.tempFilePath, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
 
     res.status(200).json({
       msg: "File uploaded successfully",
@@ -113,16 +115,8 @@ exports.videoUpload = async (req, res) => {
     const file = req.files.videoFile;
     console.log(file);
 
-    // //* video expenstion validation
+    //* video expenstion validation
     const supportedTypes = ["mp4", "avi", "mov", "wmv"];
-
-    // const reqFileType = file.name.split(".")[1].toLowerCase(); //todo: give extension
-    // if (!isValidFileType(reqFileType, supportedType)) {
-    //   return res.status(400).json({
-    //     sucess: false,
-    //     msg: "Invalid file type",
-    //   });
-    // }
 
     // Extract file extension
     const fileExtension = file.name.split(".").pop().toLowerCase();
@@ -144,14 +138,14 @@ exports.videoUpload = async (req, res) => {
     console.log("Video uploaded to cloudinary", response);
 
     // db entry
-    // const newFile = new File({
-    //   name,
-    //   imageURL: response.secure_url,
-    //   tag,
-    //   email,
-    // });
-    // await newFile.save();
-    // console.log("File saved to DB");
+    const newFile = new DB_File({
+      name,
+      imageURL: response.secure_url,
+      tag,
+      email,
+    });
+    await newFile.save();
+    console.log("File saved to DB");
 
     res.status(200).json({
       msg: "File uploaded successfully",
@@ -189,30 +183,28 @@ exports.imageReduceUpload = async (req, res) => {
       });
     }
 
-    console.log("hi"); // perfect till this step
-
     // now file is supported
     // now file is uploaded to cloudinary server
 
     const response = await uploadToCloudinary(file, "VishalSoni", 10);
     console.log(response);
 
-    // // db entry
-    // const newFile = new File({
-    //   name,
-    //   imageURL: response.secure_url,
-    //   tag,
-    //   email,
-    // });
-    // await newFile.save();
-    // console.log("File saved to DB");
+    // db entry
+    const newFile = new DB_File({
+      name,
+      imageURL: response.secure_url,
+      tag,
+      email,
+    });
+    await newFile.save();
+    console.log("File saved to DB");
 
-    // deleting local file
-    // fs.unlink(file.tempFilePath, (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //   }
-    // });
+    //* deleting local file { Optional }
+    fs.unlink(file.tempFilePath, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
 
     res.status(200).json({
       msg: "File uploaded successfully",
