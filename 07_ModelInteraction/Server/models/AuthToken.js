@@ -18,9 +18,9 @@ const authTokenSchema = new mongoose.Schema({
   },
 });
 
-authTokenSchema.methods.generateToken = function () {
-  const token = jwt.sign({ userId: this.userId }, process.env.JWT_SECRET, { expiresIn: '5m' });
-  return token;
-}
+// authTokenSchema.methods.generateToken = function () {
+//   const token = jwt.sign({ userId: this.userId }, process.env.JWT_SECRET, { expiresIn: '5m' });
+//   return token;
+// }
 
 module.exports = mongoose.model("AuthToken", authTokenSchema);

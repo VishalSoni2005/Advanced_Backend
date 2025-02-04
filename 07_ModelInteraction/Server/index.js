@@ -5,7 +5,7 @@ const routes = require('./routes/routes');
 const connectDB = require('./config/db.JS');
 
 // Connect to MongoDB
-connectDB;
+connectDB.connectDB();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
