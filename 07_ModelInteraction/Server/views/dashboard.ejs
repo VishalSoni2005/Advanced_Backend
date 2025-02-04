@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* General Styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #5c5704, #2c3e50);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #f39c12;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+            text-align: center;
+        }
+
+        .user-list {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-details p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #ecf0f1;
+        }
+
+        .user-role {
+            font-weight: bold;
+            color: #f39c12;
+        }
+
+        .logout-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <h2>Total Registered Users</h2>
+
+    <div class="user-list">
+        <% users.forEach(user => { %>
+            <div class="user-item">
+                <div class="user-details">
+                    <p><strong>Name:</strong> <%= user.name %></p>
+                    <p><strong>Email:</strong> <%= user.email %></p>
+                </div>
+                <div class="user-role">
+                    <p><strong>Role:</strong> <%= user.role %></p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <a href="/logout" class="logout-button">Logout</a>
+</body>
+</html>
