@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-require('dotenv').config();
-const routes = require('./routes/routes');
-const connectDB = require('./config/db.JS');
+require("dotenv").config();
+const routes = require("./routes/routes");
+const connectDB = require("./config/database");
 
 // Connect to MongoDB
 connectDB.connectDB();
@@ -10,11 +10,9 @@ connectDB.connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-
 // Routes
 
-app.use('/api/', routes);
+app.use("/api", routes);
 
 // listen
 const PORT = process.env.PORT || 4000;

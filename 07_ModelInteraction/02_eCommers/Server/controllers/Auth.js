@@ -1,11 +1,29 @@
-const User = require("../models/User.model");
-const Products = require("../models/product.model");
-const Order = require("../models/order.model");
-const Cart = require("../models/Cart.model");
-const Category = require("../models/category.model");
+const User = require("../models/User");
+const Products = require("../models/Product");
+// const Order = require("../models/order.model");
+// const Cart = require("../models/Cart.model");
+const Category = require("../models/category");
 
 const bcrypt = require("bcryptjs");
 
+exports.getUsers = async (req, res) => {
+  try{
+    
+    const users = await User.find();
+    res.status(200).send({
+      success: true,
+      data: users,
+    });
+  }catch(e) {
+    console.log("Error: ", e);
+    res.status(404).send({
+      sucess: false,
+      mag: "Error fetching users",
+    })
+    
+  }
+}
+ 
 // signup
 exports.signup = async (req, res) => {
   try {
@@ -29,7 +47,7 @@ exports.signup = async (req, res) => {
     // Hash password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await User.create({
+    const newUser = new User({
       name,
       email,
       password: hashedPassword, // Store hashed password
@@ -37,13 +55,16 @@ exports.signup = async (req, res) => {
       role,
     });
 
-    console.log("User created", newUser)
+    await newUser.save();
+
+    console.log("User created", newUser);
     res.status(201).json({
       message: "User created successfully",
       success: true,
       user: newUser,
     });
   } catch (error) {
+    console.error("Error creating user:", error);
     res.status(500).json({
       error: error.message,
       success: false,
@@ -69,7 +90,7 @@ exports.createProduct = async (req, res) => {
   try {
     const { name, price, category, stock, description } = req.body;
 
-    if (!name ||!price ||!category ||!stock ||!description) {
+    if (!name || !price || !category || !stock || !description) {
       return res.status(400).json({
         message: "All fields are required",
         success: false,
@@ -117,32 +138,31 @@ exports.getCategories = async function (req, res) {
       success: false,
     });
   }
-}
+};
 
 exports.createCategory = async (req, res) => {
-  try{
-    const {name, description} = req.body;
+  try {
+    const { name, description } = req.body;
 
     // check if category is already
-    const existingCategory = await Category.findOne({name});
-    if(existingCategory) {
+    const existingCategory = await Category.findOne({ name });
+    if (existingCategory) {
       return res.status(400).json({
         message: "Category already exists",
         success: false,
       });
     }
 
-    const newCategory = await Category.create({name, description});
+    const newCategory = await Category.create({ name, description });
     res.status(201).json({
       message: "Category created successfully",
       success: true,
       category: newCategory,
     });
-
-  } catch(error) {
+  } catch (error) {
     res.status(500).json({
       msg: error.message,
       success: false,
     });
   }
-}
+};

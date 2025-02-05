@@ -4,6 +4,7 @@ const controllers = require("../controllers/Auth");
 
 // user
 router.post("/signup", controllers.signup);
+router.get('/getUsers', controllers.getUsers);
 
 // product
 router.get("/products", controllers.getProducts);
@@ -14,11 +15,11 @@ router.get("/categories", controllers.getCategories);
 router.post('/create-category', controllers.createCategory);
 
 // order
-router.get('/order', controllers.getOrder);
-router.post('/create-order', controllers.createOrder);
+// router.get('/order', controllers.getOrder);
+// router.post('/create-order', controllers.createOrder);
 
-// carts
-router.post('/create-cart', controllers.createCart);
-router.get('/cart', controllers.createCart);
+// // carts
+// router.post('/create-cart', controllers.createCart);
+// router.get('/cart', controllers.createCart);
 
 module.exports = router;
