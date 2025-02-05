@@ -8,7 +8,8 @@ const connectDB = require('./config/db.JS');
 connectDB.connectDB();
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+
 
 
 // Routes
