@@ -17,7 +17,6 @@ router.get("/auth", auth, (req, res) => {
 });
 
 // protected routes
-
 router.get("/student", auth, isStudent, (req, res) => {
   // fist auth then isStudent
   res.json({

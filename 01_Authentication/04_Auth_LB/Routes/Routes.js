@@ -11,7 +11,7 @@ router.get("/auth", auth, (req, res) => {
   // fist auth then protected
   res.json({
     success: true,
-    message: "You are authenticated to join as a protected route",
+    message: "Welcom to test route (*.*)",
     user: req.user,
   });
 });

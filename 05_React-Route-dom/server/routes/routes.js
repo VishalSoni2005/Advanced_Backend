@@ -4,9 +4,9 @@ const { auth, isStudent, isAdmin } = require("../middleware/auth.js");
 const { register, login, logout } = require("../controller/controller.js");
 
 // post routes
-router.post("/api/register", register);
-router.post("/api/login", login); //!
-router.post("/api/logout", logout);
+router.post("/register", register);
+router.post("/login", login); //!
+router.post("/logout", logout);
 
 // test route for auth
 router.get("/test", auth, (req, res) => {

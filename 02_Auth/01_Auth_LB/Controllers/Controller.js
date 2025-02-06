@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("../Model/User");
 const jwt = require("jsonwebtoken");
 
@@ -77,7 +77,7 @@ exports.login = async (req, res) => {
 
     // VERIFY PASSWORD AND PASSWORD HASH
     const isPasswordMatch = await bcrypt.compare(password, user.password); // TODO: two parameter required one is from req and other is from db
-    
+
     //* read above line
     const payload = {
       id: user._id,

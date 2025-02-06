@@ -6,13 +6,13 @@ const controllers = require("../controllers/Auth");
 router.post("/signup", controllers.signup);
 router.get('/getUsers', controllers.getUsers);
 
-// product
-router.get("/products", controllers.getProducts);
-router.post('/create-product', controllers.createProduct);
+// // product
+// router.get("/products", controllers.getProducts);
+// router.post('/create-product', controllers.createProduct);
 
-// category
-router.get("/categories", controllers.getCategories);
-router.post('/create-category', controllers.createCategory);
+// // category
+// router.get("/categories", controllers.getCategories);
+// router.post('/create-category', controllers.createCategory);
 
 // order
 // router.get('/order', controllers.getOrder);
